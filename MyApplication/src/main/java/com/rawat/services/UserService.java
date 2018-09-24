@@ -1,5 +1,8 @@
 package com.rawat.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +27,28 @@ public class UserService {
 	{
 		userRepo.save(user);
 	}
+
+	public List<User> getAllUsers() {
+		
+		List<User> users = new ArrayList<>();
+		
+		for (User user : userRepo.findAll()) {
+			users.add(user);
+		}
+		
+		return users;
+		
+	}
+	
+	public void deleteUser(int id)
+	{
+		userRepo.deleteById(id);
+	}
+	
+	
+	
+	
+	
+	
 	
 }

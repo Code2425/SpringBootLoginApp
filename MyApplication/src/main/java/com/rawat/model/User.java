@@ -22,6 +22,12 @@ public class User {
 	
 	
 	
+	User() {
+	
+	}
+
+
+
 	public User( String userName, String firstName, String lastName,  int age,String email, String password) {
 
 		this.userName = userName;
@@ -32,7 +38,12 @@ public class User {
 		this.password = password;
 	}
 	
-	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public int getAge() {
 		return age;
