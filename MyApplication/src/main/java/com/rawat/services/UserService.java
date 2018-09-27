@@ -2,6 +2,7 @@ package com.rawat.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -45,6 +46,13 @@ public class UserService {
 		userRepo.deleteById(id);
 	}
 	
+	public Optional<User> editUser(int id) {
+		return userRepo.findById(id);
+	}
+	
+	public User findByUserNameAndPassword(String userName, String password) {
+		return userRepo.findByUserNameAndPassword(userName, password);
+	}
 	
 	
 	

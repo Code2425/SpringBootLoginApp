@@ -5,13 +5,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rawat.model.User;
 import com.rawat.services.UserService;
@@ -56,6 +54,32 @@ public class MyController {
 		userService.deleteUser(id);
 		request.setAttribute("mode", "ALL_USERS");
 		return "welcomePage";
+	}
+	
+	@RequestMapping("/edit-user")
+	public String editUser(@RequestParam int id,HttpServletRequest request) {
+		request.setAttribute("user", userService.editUser(id));
+		request.setAttribute("mode", "MODE_UPDATE");
+		return "welcomePage";
+	}
+	
+	@RequestMapping("/login")
+	public String login(HttpServletRequest request) {
+		request.setAttribute("mode", "MODE_LOGIN");
+		return "welcomePage";
+	}
+	
+	@RequestMapping ("/login-user")
+	public String loginUser(@ModelAttribute User user, HttpServletRequest request) {
+		if(userService.findByUserNameAndPassword(user.getUserName(), user.getPassword())!=null) {
+			return "homepage";
+		}
+		else {
+			request.setAttribute("error", "Invalid Username or Password");
+			request.setAttribute("mode", "MODE_LOGIN");
+			return "welcomePage";
+			
+		}
 	}
 
 }
